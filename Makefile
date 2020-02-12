@@ -1,19 +1,24 @@
 CC = gcc
 
-CFLAGS = -g -Wall
+CFLAGS = -g -Wall -c -o
 
 SDIR = src
 ODIR = obj
 
+OBJS = \
+	main.o
+
+OBJ = $(patsubst %,$(ODIR)/%,$(OBJS))
+
 TARGET = main
 
-all: $(TARGET)
+$(ODIR)/%.o: $(SDIR)/%.c
+	$(CC) $(CFLAGS) $@ $^
 
-$(TARGET): $(SDIR)/$(TARGET).c
-	$(CC) $(CFLAGS) -o $(ODIR)/$(TARGET) $(SDIR)/$(TARGET).c
+all: $(OBJ)
 
 clean:
 	$(RM) $(SDIR)/$(TARGET)
 
 run: 
-	./$(ODIR)/$(TARGET)
+	./main
