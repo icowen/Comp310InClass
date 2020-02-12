@@ -10,12 +10,11 @@ OBJS = \
 
 OBJ = $(patsubst %,$(ODIR)/%,$(OBJS))
 
-TARGET = main
-
 $(ODIR)/%.o: $(SDIR)/%.c
 	$(CC) $(CFLAGS) $@ $^
 
 all: $(OBJ)
+	gcc obj/*.o -o main
 
 clean:
 	$(RM) $(SDIR)/$(TARGET)
